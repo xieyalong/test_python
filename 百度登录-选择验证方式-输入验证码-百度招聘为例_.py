@@ -24,7 +24,7 @@ objElement.click()
 time.sleep(2)
 #密码
 objElement=browser.find_element_by_id('TANGRAM__PSP_3__password')
-objElement.send_keys('')
+objElement.send_keys('密码')
 objElement.click()
 time.sleep(2)
 #登录
