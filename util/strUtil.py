@@ -26,8 +26,8 @@ def strToDict(str):
 #字符串转map
 def strToList(str):
     return ast.literal_eval(str)
-#字符串转json
-def strToJson(data):
+#字符串转python
+def strJsonToObj(data):
     json.loads(data)
 ########################
 #list转元组
