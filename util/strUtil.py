@@ -6,7 +6,8 @@ import ast
 #python类型转json
 def toJson(obj):
     return json.dumps(obj,ensure_ascii=False)
-
+def jsonToObj(data):
+    return json.loads(data)
 ########################
 #json转list
 def josnToList(jsonList):
@@ -26,9 +27,6 @@ def strToDict(str):
 #字符串转map
 def strToList(str):
     return ast.literal_eval(str)
-#字符串转python
-def strJsonToObj(data):
-    json.loads(data)
 ########################
 #list转元组
 def listToTuple(obj):
