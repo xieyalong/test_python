@@ -25,6 +25,8 @@ print('二进制查看网页内容=',r.content)
 print('状态码=',r.status_code)
 print('查看相应头部=',r.headers)
 print('查看请求的url=',r.url)
+#是json才能查看
+# print('直接查看json=',r.json())
 with open(r'requests\baidu.html','w',encoding='utf-8') as fw:
     fw.write(r.text)
 
