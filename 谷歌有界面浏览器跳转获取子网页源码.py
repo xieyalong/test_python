@@ -23,7 +23,12 @@ print('跳转后 页面=',browser.window_handles,'--size=',len(browser.window_ha
 #保存子页面的源码
 with open(r'文件\1.html','w',encoding='utf-8') as f:
     f.write(browser.page_source)
-
+#获取子页标题
+title=browser.find_element_by_css_selector('h1[style="font-size:20px; line-height:22px; height:22px; margin-bottom:10px;"]')
+#获取子页内容
+content=browser.find_element_by_id('contsonee16df5673bc')
+#输出标题和内容
+print('title=',title.text,'---content=',content.text)
 
 
 
