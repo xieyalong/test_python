@@ -2,7 +2,7 @@
 import scrapy
 #所有的导入都是从核心目录中导入
 #核心目录是“dangdang”
-from dangdang.items import DangdangItem
+from dangdang.dangdang.items import DangdangItem
 
 class DdSpider(scrapy.Spider):
     name = 'dd'
