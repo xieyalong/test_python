@@ -34,10 +34,17 @@ button.click()
 #解析网络页面
 parser = etree.HTMLParser(encoding='utf-8')
 html=etree.HTML(browser.page_source,parser=parser)
-list=html.xpath('a[@class="contentpile__content__wrapper__item__info__box__cname__title company_title"]/text()')
-print('list=',html)
+# html=etree.parse(browser.page_source,parser=parser)
+
+list=html.xpath('//title/text()')
+print('title标签的内容=',list)
+list=html.xpath('//a[@class="contentpile__content__wrapper__item__info__box__cname__title company_title"]/text()')
+print('公司名称=',len(list),list)
+
 print('------结束----')
-# browser.quit()
+html=browser.find_elements_by_class_name('contentpile__content__wrapper__item__info__box__jobname__title')
+print('根据class属性值查找=',len(html))
+browser.quit()
 
 
 
