@@ -14,7 +14,6 @@ import scrapy
 class ZhilianItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    title=scrapy.Field()
-    price=scrapy.Field()
     list=scrapy.Field()
-    data=scrapy.Field()
+    page=scrapy.Field()
+    type=scrapy.Field()

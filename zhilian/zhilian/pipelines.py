@@ -16,10 +16,15 @@ class ZhilianPipeline(object):
         print(self.abc)
 
     def process_item(self, item, spider):
-        print('item=',item['list'])
-        #存入文件
-        with open('data.json','w',encoding='utf-8') as fw:
-            fw.write(json.dumps(item['list'],ensure_ascii=False))
+        print('item=',len(item['list']),'page=',item['page'],'type=',item['type'])
+        #以追加的方式网文件内写入
+        if '主页'==item['type']:
+            with open(item['page'],'a',encoding='utf-8') as fw:
+                fw.write(json.dumps(item['list'],ensure_ascii=False))
+        elif '子页'==item['type']:
+            with open(item['page'], 'a', encoding='utf-8') as fw:
+                fw.write(json.dumps(item['list'], ensure_ascii=False))
+
         return item
 
     def close_spider(self,spider):
