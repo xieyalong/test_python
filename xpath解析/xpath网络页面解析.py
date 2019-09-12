@@ -34,6 +34,7 @@ button.click()
 #解析网络页面
 parser = etree.HTMLParser(encoding='utf-8')
 html=etree.HTML(browser.page_source,parser=parser)
+#解析本地
 # html=etree.parse(browser.page_source,parser=parser)
 
 list=html.xpath('//title/text()')
@@ -50,33 +51,3 @@ browser.quit()
 
 
 
-
-
-# #查看所有的title
-# html=browser.find_elements_by_class_name('contentpile__content__wrapper__item__info__box__jobname__title')
-# print('根据class属性值查找=',len(html))
-#
-# html=browser.find_elements_by_link_text('北京得网时代信息技术有限公司')
-# print('根据a标签的内容查找=',len(html))
-#
-# html=browser.find_elements_by_name('loginname')
-# print('根据name属性值查找=',len(html))
-#
-# #可能说明是同一个标签
-# html=browser.find_elements_by_css_selector('img[align="absmiddle"][alt="看不清？点击更换"]')
-# print('属性选择器查找1=',len(html))
-#
-# #有“,”说明是查找所有div的标签class=layer__topbar||class=zp-searchs
-# html=browser.find_elements_by_css_selector('div[class="layer__topbar"],[class="zp-searchs"]')
-# print('组合属性选择器查找2=',len(html))
-#
-# html=browser.find_elements_by_id('search')
-# print('id选择器查找=',html)
-#
-# html=browser.find_elements_by_css_selector('.souheader__channel__item__name,#search')
-# print('组合选择器查找=',len(html))
-#
-# html=browser.find_elements_by_css_selector('.souheader>ul>.souheader__channel__item')
-# print('层级选择器选择器查找=',len(html))
-# #并集
-# html_src_list=browser.find_elements_by_css_selector('a[target="_blank"][class="link"]')
