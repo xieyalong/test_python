@@ -46,12 +46,15 @@ class Zl1Spider(scrapy.Spider):
         # yield把数据给引擎在扔给pipelines.py的item
         #yield只是把任务加入队列
         yield zlitem
-        # ------获取第一个子页面，子页面太多这里只做2个--------
+        # ------获取子页面，子页面太多这里只做2个--------
+        #主页面每个item的子页面连接
         a_list=response.xpath('//a[contains(@name,"itemlist-picture") and contains(@target,"_blank") and contains(@class,"pic") and contains(@dd_name,"单品图片")]/@href').getall()
         print('子页面连接=',len(a_list))
         a_list=a_list[0:2]
         for i in range(0,len(a_list)):
-            yield scrapy.Request(url=a_list[i], callback=self.childPage,meta={'info':'子页面','url':a_list[i]})
+            #callback=self.childPage：回调的函数
+            #meta：给下一个页面传递的数据
+            yield scrapy.Request(url=a_list[i], callback=self.childPage,meta={'info':'子页面','url':a_list[i],'jsonName': str_url + '子页面'})
 
         print('子连接=',a_list)
         #------下一页--------
@@ -68,17 +71,22 @@ class Zl1Spider(scrapy.Spider):
             # 在把请求放到队列里面
             # callback=self.parse 解析的是同一个页面所以还用parse当前方法
             # allowed_domains和start_urls一定要一样不然scrapy.Request无效
-            yield scrapy.Request(url=next_url, callback=self.parse,meta={'info':'数据','name':'李四','jsonName':str_url+'子页面'})
+            yield scrapy.Request(url=next_url, callback=self.parse)
 
 
     #==================获取子页面======================================
     def childPage(self,response):
-        print('------进入子页面------')
-        list=response.xpath('//div[@class="name_info"]/h1/text()').get()
-        print('子页面=',list)
-        print('子页面meta=', response.meta)
+        print('------子页面开始------')
+        title=response.xpath('//div[contains(@class,"name_info") and contains(@ddt-area,"001")]/h1/@title').get()
+        price=response.xpath('//p[@id="dd-price"]/text()').get()
+        map=response.meta
+        print('子页面meta=',map)
+        list={'title':title,'price':price}
+        print('子页面数据=',list)
         zlitem = ZhilianItem()
-        zlitem['type']='子页面'
+        zlitem['type']='子页'
         zlitem['list']=list
-        zlitem['page']='1.json'
-        yield  list
+        zlitem['page']=map['jsonName']
+        print('子页面数据=', zlitem)
+        yield  zlitem
+        print('------子页面结束------')
