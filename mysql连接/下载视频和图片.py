@@ -130,5 +130,7 @@ def downloadVideo(tableName):
 if __name__ == "__main__":
     downloadVideo('omo_resource')
     downloadVideo('omo_pe_cate')
+    print('=========完成=========')
+
 
 
