@@ -6,6 +6,7 @@ import  pymysql
 import  json
 import  decimal
 import  threading,time
+import  os
 ####################针对Decimal类型转换#######################################
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
@@ -20,6 +21,10 @@ class DecimalEncoder(json.JSONEncoder):
 
 
 def runQql(db,sql,fileName):
+    pathRoot = 'C://com.yxkf.troops//data'
+    if not os.path.exists(pathRoot):
+        os.makedirs(pathRoot)
+
     cur = db.cursor()
     results = []
     columns = []
@@ -66,7 +71,7 @@ def runQql(db,sql,fileName):
         jsonData = json.dumps(listData, cls=DecimalEncoder, ensure_ascii=False)
         # print(jsonData)
         #保存文件
-        with open(fileName, 'w', encoding="utf-8") as f:
+        with open(pathRoot+'//'+fileName, 'w', encoding="utf-8") as f:
             f.write(jsonData)
         print(fileName+'成功生成')
     except Exception as e:
